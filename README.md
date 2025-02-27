@@ -1,139 +1,134 @@
-### Copyright Oprisan Alexia-Ioana si Peiu Andreea - 314CA
+### Copyright Oprisan Alexia-Ioana and Peiu Andreea - 314CA
 
-# Tema 3 SD
+# SD Homework 3
 
 ## TASK 1
 
 ### add friend
 
-Aceasta functie are rolul de a crea legaturi bidirectionale intre nodurile
-grafului pentru a evidentia prietenia. Lista de adiacenta `friends` stocheaza
-conexiunile realizate intre prieteni. Aceasta este parcursa si este creeata o
-legatura intre doi utilizatori prin adaugarea unui nod in lista corespunzatoare
-nodului de inceput.
+This function's role is to create bidirectional connections between the graph's
+nodes to highlight the friendship. The adjacency list `friends` stores the
+connections established between friends. This list is traversed, and a
+connection is created between two users by adding a node to the list
+corresponding to the start node.
 
 ### remove friend
 
-Functia primeste ca parametri doi utilizatori si stearge legatura de prietenie
-dintre acestia. Astfel, sunt parcurse listele de adiacenta asociate ambelor
-id-uri si este eliminata conexiunea dintre cei doi.
+The function receives two users as parameters and removes the friendship
+connection between them. Thus, the adjacency lists associated with both IDs are
+traversed, and the connection between the two is removed.
 
 ### distance
 
-Rolul acestei functii este de a verifica daca exista un drum intre cei doi
-utilizatori si de a determina modalitatea cea mai scurta de a parcurge graful
-de la un nod la celalalt, utilizand un algoritm pentru determinarea drumului
-minim dintre doua noduri.
+The role of this function is to check if there is a path between the two users
+and to determine the shortest way to traverse the graph from one node to the
+other, using an algorithm for finding the minimum path between two nodes.
 
 ### suggestions
 
-Sunt generate sugestii de prieteni pentru un utilizator dat pe baza retelei
-de prietenii din graf. Functia gaseste si afiseaza toti prietenii prietenilor
-care nu sunt deja prieteni cu utilizatorul dat.
+Friend suggestions are generated for a given user based on the friendship
+network in the graph. The function finds and displays all the friends of the
+friends who are not already friends with the given user.
 
 ### common
 
-Functia afiseaza in ordine crescatoare, dupa id, toti prietenii comuni
-ai doi utilizatori. Este parcursa lista de adiacenta si se cauta prietenii
-comuni care vor fi afisati, listele asociate celor doi utilizatori fiind deja
-sortate dupa id atunci cand este creeata prietenia.
+The function displays, in ascending order by id, all the mutual friends of two
+users. The adjacency list is traversed, and the mutual friends are identified
+to be displayed. The lists associated with the two users are already sorted by
+id when the friendship is created.
 
 ### friends
 
-Aceasta functie are rolul de a numara cati prieteni are un anumit utilizator.
-Pe ecran este afisata dimensiunea listei asociate utilizatorului.
+This function's role is to count how many friends a certain user has. The size
+of the list associated with that user is displayed on the screen.
 
 ### popular
 
-Este parcursa lista de adiacenta a unui utilizator si se verifica pentru
-fiecare dintre prietenii sai cate conexiuni au. Dupa ce determina numarul
-de legaturi pentru fiecare dintre acestia, este afisata persoana care are cele
-mai multe.
+The adjacency list of a user is traversed, and it checks for each of their
+friends how many connections they have. After determining the number of
+connections for each friend, the person with the most connections is displayed.
 
 ## TASK 2
 
 ### create post
 
-Aceasta functie creeaza o postare realocand memorie pentru vectorul de postari
-in care acestea sunt stocate. O postare este de tip `struct post_t`, fiind
-retinute mai multe informatii despre acestea, precum `titlu`, `user_id`
-(utilizatorul care a creat postarea), `likes` (numarul de like-uri pe care le
-strange postarea). De asemenea, este alocata memorie pentru un arbore generic
-necesar pentru a stoca repost-urile.
+This function creates a post by reallocating memory for the array of posts in
+which they are stored. A post is of type `struct post_t`, retaining several
+pieces of information about it, such as `titlu`, `user_id` (the user who
+created the post), `likes` (the number of likes the post accumulates). In
+addition, memory is allocated for a generic tree needed to store reposts.
 
 ### repost
 
-Functia primeste ca parametri un nume, un post_id si optional un repost_id.
-Este cautata in vectorul de structuri, postarea cu id-ul `post_id` cu ajutorul
-functiei `find_post_by_id`. Daca sunt primiti doar primii doi parametri, atunci
-este repostata postarea initiala si se adauga un nod in vectorul de copii al
-root-ului. In caz contrar, este realizata o cautare prin arborele `events`
-pentru a gasi nodul cu id-ul `repost_id` si este adaugat un nod in vectorul de
-copii al nodului respectiv. Cautarea se realizeaza cu ajutorul functiei
-implementate `find_node_by_id`.
+The function receives as parameters a name, a `post_id`, and optionally a
+`repost_id`. The post with the id `post_id` is searched for in the array of
+structures using the function `find_post_by_id`. If only the first two
+parameters are received, then the original post is reposted, and a node is
+added to the root's children array. Otherwise, a search is performed through
+the `events` tree to find the node with the id `repost_id`, and a node is added
+to the children array of that node. The search is done using the implemented
+function `find_node_by_id`.
 
 ### common-repost
 
-Este cautat recursiv cel mai apropiat stramos al celor doua noduri oferite ca
-parametri. Algoritmul este asemanator celui de `lowest common-ancestor`, dar
-este adaptat pentru arborele generic `events`.
+The closest ancestor of the two nodes given as parameters is searched for
+recursively. The algorithm is similar to the `lowest common-ancestor` one but
+is adapted for the generic tree `events`.
 
 ### like
 
-Functia primeste ca parametri un nume, un post_id si optional un repost_id. In
-structura fiecarui nod din arbore este retinut un vector de frecventa de
-dimensiune `MAX_PEOPLE` pentru a retine daca utilizatorul a apreciat sau nu
-postarea. Acest lucru este necesar pentru a decrementa numarul de like-uri in
-cazul in care utilizatorul a apreciat deja postarea.
+The function receives a name, a `post_id`, and optionally a `repost_id`. In the
+structure of each node in the tree, there is a frequency array of size
+`MAX_PEOPLE` to store whether the user has liked the post or not. This is
+necessary to decrement the number of likes if the user has already liked the
+post.
 
 ### ratio
 
-Aceasta functie determina cea mai apreciata postare si verifica daca un repost
-are mai multe like-uri decat postarea initiala, afisand un mesaj
-corespunzator.
+This function determines the most appreciated post and checks if a repost has
+more likes than the original post, displaying an appropriate message.
 
 ### delete
 
-Functia sterge un repost sau o postare si toate nodurile descendente. Daca
-este stearsa o postare, vectorul este shiftat la stanga cu o pozitie pentru
-ca postarile ramase sa fie pe pozitii consecutive.
+The function deletes a repost or a post and all its descendant nodes. If a post
+is deleted, the array is shifted one position to the left so that the remaining
+posts occupy consecutive positions.
 
 ### get-likes
 
-Afiseaza numarul de like-uri pe care le are o postare sau un repost.
+Displays the number of likes a post or a repost has.
 
 ### get-reposts
 
-Afiseaza toate reposturile nodului oferit ca parametru. Este parcurs
-arborele, recursiv, de la stanga la dreapta pentru fiecare nod. Daca se
-apeleaza functia pentru postarea initiala, este afisat si titlul acesteia. De
-asemenea, este afisat pentru fiecare repost persoana care l-a realizat.
+Displays all the reposts of the node given as a parameter. The tree is
+traversed recursively, from left to right, for each node. If the function is
+called for the original post, its title is also displayed. Additionally, for
+each repost, the person who made the repost is displayed.
 
-### TASK 3
+## TASK 3
 
-## feed
+### feed
 
-Parcurgerea se realizeaza de la finalul vectorului spre pozitia de inceput
-pentru a ne asigura ca postarile afisate sunt cele mai recente. Cat timp
-`feed_size` este nenul, verific daca user-ul este un prieten sau daca postarea
-apartine user-ului cautat. Daca aceasta conditie este indeplinita, este
-afisat numele utilizatorului impreuna cu titlul postarii realizate de acesta.
+The traversal is done from the end of the array toward the beginning to ensure
+that the displayed posts are the most recent. As long as `feed_size` is not
+zero, it checks if the user is a friend or if the post belongs to the searched
+user. If this condition is met, the name of the user is displayed along with
+the title of the post made by them.
 
-## view-profile
+### view-profile
 
-Acesta functie parcurge vectorul de postari si verifica daca acestea apartin
-utilizatorului dorit si afiseaza titlul celor care satisfac aceasta conditie.
-Apoi sunt parcursi toti arborii construiti in cautarea repost-urilor realizate
-de acest utilizator.
+This function traverses the array of posts and checks if they belong to the
+desired user and displays the title of those that meet this condition. Then,
+all the trees built in the search for reposts made by that user are traversed.
 
-## friends-repost
+### friends-repost
 
-Functia parcurge arborele asociat postarii cu id-ul primit de la tastatura si
-verifica recursiv pentru fiecare repost daca cel care a realizat repost-ul
-este prieten cu utilizatorul oferit ca parametru.
+The function traverses the tree associated with the post whose id was received
+from the keyboard and recursively checks for each repost if the person who made
+the repost is a friend of the user provided as a parameter.
 
-## common-group
+### common-group
 
-Functia cauta in lista de adiacenta a utilizatorului oferit ca parametru graful
-complet cu cele mai multe noduri care este format. Algoritmul utilizat pentru
-aceasta cautare se numeste `Bron Kerbosch`.
+The function searches in the adjacency list of the user provided as a parameter
+for the largest complete subgraph that is formed. The algorithm used for this
+search is called `Bron Kerbosch`.
